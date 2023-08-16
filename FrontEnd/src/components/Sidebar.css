@@ -1,0 +1,28 @@
+.sidebar {
+    height: 100%;
+}
+
+p.ms-3 {
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #1da1f2 !important;
+}
+
+.logo {
+    color: #1da1f2;
+}
+
+.peep-button {
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    border-radius: 99999px;
+    padding: 13px 93px;
+    font-weight: bold;
+}
+
+.username {
+    font-size: small;
+}
