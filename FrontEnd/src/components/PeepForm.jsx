@@ -17,7 +17,6 @@ export const PeepForm = () => {
 
     return (
         <div className="peep-form mb-2 border-bottom">
-            <h5 className="border-bottom pb-2">Home</h5>
             <form className='pt-2' onSubmit={handlePeepSubmit}>
                 <div className='d-flex'>
                     <img src="https://imgs.search.brave.com/bHpTjt49BE6IN6GPjmIm4FaNZXFj4xFH3ey8KXtPew0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dzNzY2hvb2xzLmNv/bS9ob3d0by9pbWdf/YXZhdGFyLnBuZw" alt="User profile image" className='user-image' />
