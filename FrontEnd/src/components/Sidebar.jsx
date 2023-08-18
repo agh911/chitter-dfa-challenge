@@ -16,7 +16,7 @@ export const Sidebar = () => {
                     <Search />
                     <p className='ms-3 mb-0'>Explore</p>
                 </div>
-                <div className='d-flex align-items-center mb- py-2 ps-3 sn-item'>
+                <div className='d-flex align-items-center mb-2 py-2 ps-3 sn-item'>
                     <NotificationsNone />
                     <p className='ms-3 mb-0'>Notifications</p>
                 </div>
