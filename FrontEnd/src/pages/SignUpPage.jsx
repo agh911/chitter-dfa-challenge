@@ -15,6 +15,10 @@ export const SignUpPage = () => {
                     <h1>Join the Chitter!</h1>
                     <p>Connect with friends and the world around you on Chitter.</p>
                     <SignUpForm />
+                    <p>Already have an account?</p>
+                    <a href="/signIn">
+                        <button className='sign-in-button'>Sign In</button>
+                    </a>
                 </div>
             </div>
         </div>

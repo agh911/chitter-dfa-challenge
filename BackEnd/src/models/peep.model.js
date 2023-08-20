@@ -6,8 +6,7 @@ const peepSchema = new mongoose.Schema({
     content: { type: String, required: true },
     createdAt: {
         type: Date,
-        default: Date.now,
-        required: true
+        default: Date.now
     }
 })
 

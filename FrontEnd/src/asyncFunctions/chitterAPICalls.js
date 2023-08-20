@@ -19,7 +19,7 @@ export const getPeeps = async () => {
 
 export const addPeep = async peep => {
     try {
-        const res = await axios.post(`${import.meta.env.VITE_CHITTERURL}/add`, peep);
+        const res = await axios.post(`${import.meta.env.VITE_CHITTERURL}`, peep);
         return { peep: res.data, status: res.status };
     }
     catch (e) {

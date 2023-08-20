@@ -1,4 +1,4 @@
-import { getAllPeepsService } from '../services/peeps.service';
+import { getAllPeepsService } from '../services/peeps.service.js';
 
 export const allPeeps = async (req, res) => {
     try {

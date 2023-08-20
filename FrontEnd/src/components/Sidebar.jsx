@@ -1,7 +1,7 @@
 import { BookmarkBorder, Home, ListAlt, MailOutline, MoreHoriz, NotificationsNone, PermIdentity, Search, Twitter } from '@mui/icons-material';
-import "./Sidebar.css"
+import "./Sidebar.css";
 
-export const Sidebar = () => {
+export const Sidebar = ({ signedIn, user }) => {
     return (
         <div className='sidebar me-5 mt-3'>
             <div className='mb-5'>
@@ -41,20 +41,36 @@ export const Sidebar = () => {
                     <p className='ms-3 mb-0'>More</p>
                 </div>
             </div>
-            <div className='d-flex flex-column justify-content-center align-items-center'>
-                <a href="/signIn">
-                    <button className='sign-in-button mb-3'>
-                        Sign In
-                    </button>
-                </a>
-                <p className='font-bold font-small'>OR</p>
-                <a href="/signUp">
-                    <button className='sign-up-button'>
+            {signedIn && user &&
+                <div className='d-flex justify-content-between align-items-center mt-5 pb-5'>
+                    <div className='d-flex align-items-center pt-5'>
+                        <img src="https://imgs.search.brave.com/bHpTjt49BE6IN6GPjmIm4FaNZXFj4xFH3ey8KXtPew0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dzNzY2hvb2xzLmNv/bS9ob3d0by9pbWdf/YXZhdGFyLnBuZw" alt="User profile image" className='user-image' />
+                        <div>
+                            <p className='mb-0'>{user.name}</p>
+                            <p className='username mb-0'>@{user.username}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <MoreHoriz />
+                    </div>
+                </div>
+            }
+            {!signedIn &&
+                <div className='d-flex flex-column justify-content-center align-items-center'>
+                    <a href="/signIn">
+                        <button className='sign-in-button mb-3'>
+                            Sign In
+                        </button>
+                    </a>
+                    <p className='font-bold font-small'>OR</p>
+                    <a href="/signUp">
+                        <button className='sign-up-button'>
 
-                        Sign Up
-                    </button>
-                </a>
-            </div>
+                            Sign Up
+                        </button>
+                    </a>
+                </div>
+            }
         </div>
     )
 }

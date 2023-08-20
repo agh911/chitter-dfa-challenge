@@ -1,21 +1,62 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState, useMemo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ChitterHome } from './pages/ChitterHome.jsx';
 import { SignInPage } from './pages/SignInPage.jsx';
 import { SignUpPage } from './pages/SignUpPage.jsx';
 
 import { checkSignIn } from './components/authentication/authenticationHelpers.js';
+import { getPeeps, addPeep } from './asyncFunctions/chitterAPICalls.js';
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [user, setUser] = useState(null);
+  const [peeps, setPeeps] = useState([]);
 
   const handleSignIn = async ({ email, password }) => {
-    setSignedIn(await checkSignIn({ email, password }));
+    const signedIn = await checkSignIn({ email, password });
+    if (signedIn) {
+      setSignedIn(true);
+      setEmail(email);
+    }
+  }
+
+  useEffect(() => {
+    if (email == null) {
+      return;
+    }
+    async function fetchUserData() {
+      const userQuery = {
+        'email': email
+      }
+      const user = await axios.post(`${import.meta.env.VITE_CHITTERURL}/getUser`, userQuery).then((res) => res.data);
+      setUser(user);
+    }
+    fetchUserData();
+  }, [email]);
+
+  const fetchPeeps = async () => {
+    const { peeps: fetchedPeeps } = await getPeeps();
+    setPeeps(fetchedPeeps);
+  }
+
+  useEffect(() => {
+    fetchPeeps();
+  }, [])
+
+  const handleAddPeep = async (peepData) => {
+    const [peep] = await addPeep(peepData);
+    setPeeps([peep, ...peeps]);
+  }
+
+  const signedOut = () => {
+    setSignedIn(false);
   }
 
   return (
     <Routes>
-      <Route path='/' element={<ChitterHome />} />
+      <Route path='/' element={<ChitterHome user={user} peeps={peeps} handleAddPeep={handleAddPeep} />} />
       <Route path='/signIn' element={<SignInPage handleSignIn={handleSignIn} />} />
       <Route path='/signUp' element={<SignUpPage />} />
     </Routes>

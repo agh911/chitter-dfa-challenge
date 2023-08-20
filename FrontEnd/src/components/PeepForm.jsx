@@ -1,18 +1,34 @@
 import React, { useState } from 'react';
 import { ImageOutlined, GifBoxOutlined, PollOutlined, SentimentSatisfiedAltOutlined, CalendarTodayOutlined, LocationOnOutlined } from '@mui/icons-material';
 import './PeepForm.css';
+import axios from 'axios';
 
-export const PeepForm = () => {
+export const PeepForm = ({ handleAddPeep, user }) => {
     const [peepText, setPeepText] = useState('');
 
     const handlePeepChange = (event) => {
         setPeepText(event.target.value);
     }
 
-    const handlePeepSubmit = (event) => {
+
+    const handlePeepSubmit = async (event) => {
         event.preventDefault();
-        console.log('Peep submitted:', peepText);
-        setPeepText('');
+        try {
+            const peepData = {
+                'name': user.name,
+                'username': user.username,
+                'content': peepText,
+            }
+            console.log('Peep submitted:', peepData);
+            const response = await axios.post(`${import.meta.env.VITE_CHITTERURL}/`, peepData);
+            console.log('Peep added successfully:', response.data.message);
+            setPeepText('');
+        } catch (error) {
+            console.error('Failed:', error.message);
+            if (error.response) {
+                console.log('Server responded:', error.response.data);
+            }
+        }
     }
 
     return (

@@ -4,24 +4,21 @@ import User from '../models/user.model.js';
 const router = express.Router();
 
 router.route('/')
-    .post((req, res) => {
-        const { email } = req.body;
-        User.findOne({ email }, (err, user) => {
-            if (user) {
-                res.send({ message: `User already exists` });
-            }
-            else {
-                const user = new User(req.body);
-                user.save(err => {
-                    if (err) {
-                        res.send(err);
-                    }
-                    else {
-                        res.send({ message: `Sign up successful.` });
-                    }
-                })
-            }
-        })
+    .post(async (req, res) => {
+        const { email, name, username, password } = req.body;
+        const user = await User.findOne({ email });
+        if (user != null) {
+            res.status(500).send({ message: `User already exists` });
+        } else {
+            const user = new User({
+                name,
+                username,
+                email,
+                password,
+            });
+            await user.save();
+            res.send({ message: `Sign up successful.` });
+        }
     })
 
 export { router as signUp };

@@ -5,10 +5,11 @@ import { config } from 'dotenv';
 
 config({ path: `.env.${process.env.NODE_ENV}` });
 
-import { allPeeps } from './src/routes/allPeeps.route';
-import { addPeep } from './src/routes/addPeep.route';
-import { signIn } from './src/routes/signIn.route';
-import { signUp } from './src/routes/signUp.route';
+import { allPeeps } from './src/routes/allPeeps.route.js';
+import { addPeep } from './src/routes/addPeep.route.js';
+import { signIn } from './src/routes/signIn.route.js';
+import { signUp } from './src/routes/signUp.route.js';
+import { userRouter } from './src/routes/user.route.js';
 
 const port = process.env.PORT;
 const host = process.env.HOST;
@@ -23,9 +24,15 @@ const main = async () => {
 main().catch((err) => console.log(err));
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200,
+}
+app.use(cors(corsOptions));
 app.use(`/`, allPeeps);
 app.use(`/`, addPeep);
+app.use(`/`, userRouter);
 app.use(`/signIn`, signIn);
 app.use(`/signUp`, signUp);
 

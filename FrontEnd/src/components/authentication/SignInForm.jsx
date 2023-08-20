@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../SignInForm.css';
+
+import { checkSignIn } from './authenticationHelpers.js';
 
 export const SignInForm = ({ handleSignIn }) => {
     const [signIn, setSignIn] = useState({
         email: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -15,9 +20,15 @@ export const SignInForm = ({ handleSignIn }) => {
         }));
     }
 
-    const signInSubmitHandler = (e) => {
+    const signInSubmitHandler = async (e) => {
         e.preventDefault();
-        handleSignIn(signIn);
+
+        const signInStatus = await checkSignIn(signIn);
+
+        if (signInStatus) {
+            handleSignIn(signIn);
+            navigate('/');
+        }
     }
 
     return (
@@ -31,7 +42,7 @@ export const SignInForm = ({ handleSignIn }) => {
                     name="email"
                     value={signIn.email}
                     onChange={handleChange}
-                    placeholder="example@mail.com"
+                    placeholder="johndoe@mail.com"
                     required
                 />
                 <label htmlFor="password">Password:</label>
@@ -44,7 +55,7 @@ export const SignInForm = ({ handleSignIn }) => {
                     placeholder="Your password"
                     required
                 />
-                <button type="submit">Sign In</button>
+                <button className="font-bold" type="submit">Sign In</button>
             </form>
         </div>
     )
