@@ -14,10 +14,19 @@ export const PeepForm = ({ user }) => {
     const handlePeepSubmit = async (event) => {
         event.preventDefault();
         try {
-            const peepData = {
-                'name': user.name,
-                'username': user.username,
-                'content': peepText,
+            let peepData = {};
+            if (user) {
+                peepData = {
+                    'name': user.name,
+                    'username': user.username,
+                    'content': peepText,
+                };
+            } else {
+                peepData = {
+                    'name': 'Unknown Peeper',
+                    'username': 'anonymous',
+                    'content': peepText,
+                }
             }
             console.log('Peep submitted:', peepData);
             const response = await axios.post(`${import.meta.env.VITE_CHITTERURL}/`, peepData);

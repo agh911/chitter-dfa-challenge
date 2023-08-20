@@ -3,6 +3,18 @@ import { ChatBubbleOutline, Repeat, FavoriteBorderOutlined, PublishOutlined } fr
 import './PeepCard.css'
 
 export const PeepCard = ({ peeps }) => {
+    const formatDate = (dateString) => {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+        };
+        return new Date(dateString).toLocaleString('en-GB', options);
+    };
+
     return (
         <>
             {peeps.map((peep) => (
@@ -13,7 +25,7 @@ export const PeepCard = ({ peeps }) => {
                             <div className="d-flex align-items-center">
                                 <p className='peep-auth me-2'>{peep.name}</p>
                                 <p className='username me-2'>@{peep.username}</p>
-                                <p className='peep-date'>• {peep.createdAt}</p>
+                                <p className='peep-date'>• {formatDate(peep.createdAt)}</p>
                             </div>
                             <p>{peep.content}</p>
                         </div>
