@@ -3,7 +3,7 @@ import { ImageOutlined, GifBoxOutlined, PollOutlined, SentimentSatisfiedAltOutli
 import './PeepForm.css';
 import axios from 'axios';
 
-export const PeepForm = ({ handleAddPeep, user }) => {
+export const PeepForm = ({ user }) => {
     const [peepText, setPeepText] = useState('');
 
     const handlePeepChange = (event) => {

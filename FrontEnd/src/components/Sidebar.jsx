@@ -41,7 +41,7 @@ export const Sidebar = ({ signedIn, user }) => {
                     <p className='ms-3 mb-0'>More</p>
                 </div>
             </div>
-            {signedIn && user &&
+            {signedIn &&
                 <div className='d-flex justify-content-between align-items-center mt-5 pb-5'>
                     <div className='d-flex align-items-center pt-5'>
                         <img src="https://imgs.search.brave.com/bHpTjt49BE6IN6GPjmIm4FaNZXFj4xFH3ey8KXtPew0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dzNzY2hvb2xzLmNv/bS9ob3d0by9pbWdf/YXZhdGFyLnBuZw" alt="User profile image" className='user-image' />

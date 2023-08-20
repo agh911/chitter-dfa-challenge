@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ChitterHome } from './pages/ChitterHome.jsx';
 import { SignInPage } from './pages/SignInPage.jsx';
@@ -17,7 +17,6 @@ function App() {
   const handleSignIn = async ({ email, password }) => {
     const signedIn = await checkSignIn({ email, password });
     if (signedIn) {
-      setSignedIn(true);
       setEmail(email);
     }
   }
@@ -32,6 +31,7 @@ function App() {
       }
       const user = await axios.post(`${import.meta.env.VITE_CHITTERURL}/getUser`, userQuery).then((res) => res.data);
       setUser(user);
+      setSignedIn(true);
     }
     fetchUserData();
   }, [email]);
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<ChitterHome user={user} peeps={peeps} handleAddPeep={handleAddPeep} />} />
+      <Route path='/' element={<ChitterHome signedIn={signedIn} user={user} peeps={peeps} handleAddPeep={handleAddPeep} />} />
       <Route path='/signIn' element={<SignInPage handleSignIn={handleSignIn} />} />
       <Route path='/signUp' element={<SignUpPage />} />
     </Routes>
