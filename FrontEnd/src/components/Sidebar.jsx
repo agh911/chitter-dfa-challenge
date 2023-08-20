@@ -42,13 +42,13 @@ export const Sidebar = () => {
                 </div>
             </div>
             <div className='d-flex flex-column justify-content-center align-items-center'>
-                <a href="/signin">
+                <a href="/signIn">
                     <button className='sign-in-button mb-3'>
                         Sign In
                     </button>
                 </a>
                 <p className='font-bold font-small'>OR</p>
-                <a href="/signup">
+                <a href="/signUp">
                     <button className='sign-up-button'>
 
                         Sign Up

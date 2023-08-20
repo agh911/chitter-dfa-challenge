@@ -1,7 +1,8 @@
-import { SignInForm } from "../components/SignInForm.jsx";
+import PropTypes from "prop-types";
+import { SignInForm } from "../components/authentication/SignInForm.jsx";
 import "./SigningPages.css";
 
-export const SignInPage = () => {
+export const SignInPage = ({ handleSignIn }) => {
     return (
         <div className="container-fluid vh-100">
             <div className="row full-height d-flex align-content-center">
@@ -14,9 +15,13 @@ export const SignInPage = () => {
                 <div className="col d-flex flex-column align-items-center justify-content-center">
                     <h1>Welcome to Chitter!</h1>
                     <p>Connect with friends and the world around you on Chitter.</p>
-                    <SignInForm />
+                    <SignInForm handleSignIn={handleSignIn} />
                 </div>
             </div>
         </div>
     );
 };
+
+SignInPage.propTypes = {
+    handleSignIn: PropTypes.func.isRequired,
+}
