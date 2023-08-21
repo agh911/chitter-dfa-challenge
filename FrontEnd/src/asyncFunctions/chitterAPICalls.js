@@ -27,7 +27,7 @@ export const addPeep = async peep => {
             status: e.response?.status ?? e.status,
             error: {
                 type: `post`,
-                message: e.response?.message ?? e.message
+                message: e.response?.data?.message ?? e.message,
             }
         };
     }
