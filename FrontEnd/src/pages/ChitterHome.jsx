@@ -13,7 +13,7 @@ export const ChitterHome = ({ signedIn, peeps, handleAddPeeps, user }) => {
                 </div>
                 <div className="col-9">
                     <h5 className="border-bottom pb-2 mt-3">Home</h5>
-                    <PeepForm handleAddPeeps={handleAddPeeps} user={user} />
+                    {signedIn && <PeepForm handleAddPeeps={handleAddPeeps} user={user} />}
                     <h6 className="my-3">Latest peeps</h6>
                     <PeepCard peeps={peeps} />
                 </div>

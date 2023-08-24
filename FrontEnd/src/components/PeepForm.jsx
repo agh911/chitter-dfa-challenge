@@ -21,17 +21,12 @@ export const PeepForm = ({ user }) => {
                     'username': user.username,
                     'content': peepText,
                 };
-            } else {
-                peepData = {
-                    'name': 'Unknown Peeper',
-                    'username': 'anonymous',
-                    'content': peepText,
-                }
             }
             console.log('Peep submitted:', peepData);
             const response = await axios.post(`${import.meta.env.VITE_CHITTERURL}/`, peepData);
             console.log('Peep added successfully:', response.data.message);
             setPeepText('');
+            window.location.reload(false);
         } catch (error) {
             console.error('Failed:', error.message);
             if (error.response) {
